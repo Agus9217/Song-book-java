@@ -24,7 +24,7 @@ public class SongServiceImpl implements ISongService {
     public List<SongDTO> findAll() {
         List<Song> songList = songRepository.findAll();
         if (songList.isEmpty()) {
-            throw new MyException("error", "No hay ninguna cancion");
+            throw new MyException("No hay ninguna cancion");
         }
         return songList.stream()
                 .map(song -> {
@@ -49,13 +49,13 @@ public class SongServiceImpl implements ISongService {
             dto.setNote(song.getNote());
             return dto;
         }
-        throw new MyException("error", "No se encontro ninguna canción");
+        throw new MyException("No se encontro ninguna canción");
     }
 
     @Override
     public Song save(SongDTO songDTO) {
         if (songDTO.getName().isEmpty()) {
-            throw new MyException("error", "Ingresa una canción válida");
+            throw new MyException("Ingresa una canción válida");
         }
         Song song = new Song();
         song.setName(songDTO.getName());
@@ -68,7 +68,7 @@ public class SongServiceImpl implements ISongService {
     @Override
     public void deleteById(Long id) {
         if (id == null || id <= 0) {
-            throw new MyException("error", "Ingresa un ID válido");
+            throw new MyException("Ingresa un ID válido");
         }
         songRepository.deleteById(id);
     }

@@ -1,25 +1,22 @@
-package com.justinapp.Response;
+package com.justinapp.Exception;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class ResponseMessages {
-    private String status;
+public class ErrorResponse {
+    private Integer status;
     private String message;
 
-    public ResponseMessages() {
+    public ErrorResponse() {
     }
 
-    public ResponseMessages(String status, String message) {
+    public ErrorResponse(Integer status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
