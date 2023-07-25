@@ -1,6 +1,6 @@
 package com.justinapp.Services.Impl;
 
-import com.justinapp.Error.Exceptions.BadRequest;
+import com.justinapp.Error.Exceptions.NotFound;
 import com.justinapp.Models.DTO.SongDTO;
 import com.justinapp.Models.Song;
 import com.justinapp.Repositories.ISongRepository;
@@ -24,7 +24,7 @@ public class SongServiceImpl implements ISongService {
     public List<SongDTO> findAll() {
         List<Song> songList = songRepository.findAll();
         if (songList.isEmpty()) {
-            throw new BadRequest("No hay ninguna cancion");
+            throw new NotFound("No hay ninguna cancion");
         }
         return songList.stream()
                 .map(song -> {
@@ -49,13 +49,13 @@ public class SongServiceImpl implements ISongService {
             dto.setNote(song.getNote());
             return dto;
         }
-        throw new BadRequest("No se encontro ninguna canción");
+        throw new NotFound("No se encontro ninguna canción");
     }
 
     @Override
     public Song save(SongDTO songDTO) {
         if (songDTO.getName().isEmpty()) {
-            throw new BadRequest("Ingresa una canción válida");
+            throw new NotFound("Ingresa una canción válida");
         }
         Song song = new Song();
         song.setName(songDTO.getName());
@@ -68,7 +68,7 @@ public class SongServiceImpl implements ISongService {
     @Override
     public void deleteById(Long id) {
         if (id == null || id <= 0) {
-            throw new BadRequest("Ingresa un ID válido");
+            throw new NotFound("Ingresa un ID válido");
         }
         songRepository.deleteById(id);
     }

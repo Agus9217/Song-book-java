@@ -1,6 +1,6 @@
 package com.justinapp.Controllers;
 
-import com.justinapp.Error.Exceptions.BadRequest;
+import com.justinapp.Error.Exceptions.NotFound;
 import com.justinapp.Error.ErrorResponse;
 import com.justinapp.Models.DTO.SongDTO;
 import com.justinapp.Models.Song;
@@ -26,8 +26,11 @@ public class SongController {
         try {
             List<SongDTO> result = service.findAll();
             return ResponseEntity.ok(result);
-        } catch (BadRequest e) {
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
+        } catch (NotFound e) {
+            ErrorResponse errorResponse = new ErrorResponse(
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
+            );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
