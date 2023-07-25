@@ -1,22 +1,22 @@
-package com.justinapp.Exception;
+package com.justinapp.Error;
 
 public class ErrorResponse {
-    private Integer status;
+    private int status;
     private String message;
 
     public ErrorResponse() {
     }
 
-    public ErrorResponse(Integer status, String message) {
+    public ErrorResponse(int status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
