@@ -1,5 +1,6 @@
 package com.justinapp.Controllers;
 
+import com.justinapp.Error.Exceptions.BadRequest;
 import com.justinapp.Error.Exceptions.NotFound;
 import com.justinapp.Error.ErrorResponse;
 import com.justinapp.Models.DTO.SongDTO;
@@ -35,13 +36,32 @@ public class SongController {
         }
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Song> save (@RequestBody SongDTO dto) {
-        if (dto.getName().isEmpty()) {
-            return ResponseEntity.badRequest().build();
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<?>findById(@PathVariable Long id) {
+        try {
+            SongDTO dto = service.findById(id);
+            return ResponseEntity.ok(dto);
+        } catch (NotFound e) {
+            ErrorResponse errorResponse = new ErrorResponse(
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-        service.save(dto);
-        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<?> save (@RequestBody SongDTO dto) {
+        try {
+            service.save(dto);
+            return ResponseEntity.ok().build();
+        } catch (BadRequest e) {
+            ErrorResponse errorResponse = new ErrorResponse(
+                    HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
     }
 }
 

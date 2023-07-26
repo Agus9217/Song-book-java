@@ -1,5 +1,6 @@
 package com.justinapp.Services.Impl;
 
+import com.justinapp.Error.Exceptions.BadRequest;
 import com.justinapp.Error.Exceptions.NotFound;
 import com.justinapp.Models.DTO.SongDTO;
 import com.justinapp.Models.Song;
@@ -55,11 +56,10 @@ public class SongServiceImpl implements ISongService {
     @Override
     public Song save(SongDTO songDTO) {
         if (songDTO.getName().isEmpty()) {
-            throw new NotFound("Ingresa una canción válida");
+            throw new BadRequest("Ingresa una canción válida");
         }
         Song song = new Song();
         song.setName(songDTO.getName());
-        song.setAuthor(songDTO.getAuthor());
         song.setDescription(songDTO.getDescription());
         song.setNote(songDTO.getNote());
         return songRepository.save(song);
