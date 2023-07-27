@@ -2,6 +2,8 @@ package com.justinapp.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "autor")
 public class Author {
@@ -13,13 +15,13 @@ public class Author {
     @Column(name = "nombre")
     private String name;
 
-    @OneToOne(mappedBy = "author", fetch = FetchType.EAGER)
-    private Song song;
+    @OneToMany(mappedBy = "author")
+    private List<Song> song;
 
     public Author() {
     }
 
-    public Author(Long id, String name, Song song) {
+    public Author(Long id, String name, List<Song> song) {
         this.id = id;
         this.name = name;
         this.song = song;
@@ -41,11 +43,11 @@ public class Author {
         this.name = name;
     }
 
-    public Song getSong() {
+    public List<Song> getSong() {
         return song;
     }
 
-    public void setSong(Song song) {
+    public void setSong(List<Song> song) {
         this.song = song;
     }
 }

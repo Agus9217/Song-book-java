@@ -1,6 +1,5 @@
 package com.justinapp.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,7 +19,8 @@ public class Song {
     @Column(name = "nota")
     private String note;
 
-    @OneToOne(targetEntity = Author.class, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
+    @JoinColumn(name = "autor_ID")
     private Author author;
 
     public Song() {

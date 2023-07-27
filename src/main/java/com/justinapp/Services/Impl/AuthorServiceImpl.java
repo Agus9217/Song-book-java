@@ -2,6 +2,7 @@ package com.justinapp.Services.Impl;
 
 import com.justinapp.Models.Author;
 import com.justinapp.Models.DTO.AuthorDTO;
+import com.justinapp.Models.Song;
 import com.justinapp.Repositories.IAuthorRepository;
 import com.justinapp.Services.IAuthorService;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class AuthorServiceImpl implements IAuthorService {
         return authorList.stream().map(song -> {
             AuthorDTO dto = new AuthorDTO();
             dto.setName(song.getName());
-            dto.setSong(song.getSong());
+            dto.setSong((Song) song.getSong());
             return dto;
         }).toList();
     }
@@ -36,7 +37,7 @@ public class AuthorServiceImpl implements IAuthorService {
             AuthorDTO dto = new AuthorDTO();
             Author author = authorOptional.get();
             dto.setName(author.getName());
-            dto.setSong(author.getSong());
+            dto.setSong((Song) author.getSong());
             return dto;
         }
         throw new IllegalArgumentException("Ingresa un ID válido");

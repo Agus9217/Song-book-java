@@ -4,7 +4,6 @@ import com.justinapp.Error.Exceptions.BadRequest;
 import com.justinapp.Error.Exceptions.NotFound;
 import com.justinapp.Error.ErrorResponse;
 import com.justinapp.Models.DTO.SongDTO;
-import com.justinapp.Models.Song;
 import com.justinapp.Services.ISongService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
