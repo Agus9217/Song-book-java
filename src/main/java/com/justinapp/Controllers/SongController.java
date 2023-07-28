@@ -1,6 +1,7 @@
 package com.justinapp.Controllers;
 
 import com.justinapp.Error.Exceptions.BadRequest;
+import com.justinapp.Error.Exceptions.NoContent;
 import com.justinapp.Error.Exceptions.NotFound;
 import com.justinapp.Error.ErrorResponse;
 import com.justinapp.Models.DTO.SongDTO;
@@ -60,6 +61,30 @@ public class SongController {
                     e.getMessage()
             );
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SongDTO dto) {
+        try {
+            service.update(id, dto);
+            return ResponseEntity.ok(dto);
+        } catch (BadRequest e) {
+            ErrorResponse errorResponse = new ErrorResponse(
+                    HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>deleteById (@PathVariable Long id) {
+        try {
+            service.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (NoContent e) {
+            return ResponseEntity.noContent().build();
         }
     }
 }

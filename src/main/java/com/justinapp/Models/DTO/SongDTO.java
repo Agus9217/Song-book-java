@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.justinapp.Models.Author;
 
 public class SongDTO {
+
+    @JsonIgnore
+    private Long id;
     private String name;
     private String description;
     private String note;
@@ -14,11 +17,19 @@ public class SongDTO {
     public SongDTO() {
     }
 
-    public SongDTO(String name, String description, String note, Author author) {
+    public SongDTO(Long id, String name, String description, String note, Author author) {
         this.name = name;
         this.description = description;
         this.note = note;
         this.author = author;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
