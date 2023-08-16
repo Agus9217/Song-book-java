@@ -84,7 +84,11 @@ public class SongController {
             service.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (NoContent e) {
-            return ResponseEntity.noContent().build();
+            ErrorResponse errorResponse = new ErrorResponse(
+                    HttpStatus.NO_CONTENT.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(errorResponse);
         }
     }
 }
